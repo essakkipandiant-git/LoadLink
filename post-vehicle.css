@@ -1,0 +1,212 @@
+/* Page specific overrides */
+body {
+    background-color: var(--bg-surface);
+}
+
+.page-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 5%;
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+/* Title Section */
+.title-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title-icon {
+    width: 68px;
+    height: 68px;
+    background: var(--accent-gradient);
+    border-radius: var(--radius-lg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 24px rgba(99, 102, 241, 0.35);
+    transform: rotate(5deg);
+    transition: all var(--transition-base);
+}
+
+.title-icon:hover {
+    transform: rotate(0deg) scale(1.1);
+}
+
+.title-section .text {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 12px;
+}
+
+.title-section .small-text {
+    margin: 0 auto;
+}
+
+/* Form Styling */
+.form-wrapper {
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 48px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent-gradient);
+}
+
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-main);
+}
+
+.required {
+    color: var(--primary-color);
+}
+
+/* Input Wrappers */
+.input-wrapper, .select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 16px;
+    pointer-events: none;
+    transition: color var(--transition-fast);
+}
+
+.custom-form input,
+.custom-form select,
+.custom-form textarea {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-surface);
+    color: var(--text-main);
+    font-size: 15px;
+    transition: all var(--transition-fast);
+}
+
+.custom-form textarea {
+    resize: vertical;
+    min-height: 120px;
+    padding-top: 14px;
+}
+
+.select-wrapper::after {
+    content: '\f107';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text-muted);
+}
+
+.custom-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-left: 16px;
+    cursor: pointer;
+}
+
+.custom-form input:focus,
+.custom-form select:focus,
+.custom-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-glow);
+    background: var(--bg-page);
+}
+
+.custom-form input:focus + .input-icon,
+.custom-form textarea:focus + .input-icon,
+.input-wrapper:focus-within .input-icon {
+    color: var(--primary-color);
+}
+
+/* Submit Button */
+.submit-btn {
+    margin-top: 16px;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    padding: 18px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: 0 10px 24px rgba(99, 102, 241, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px rgba(99, 102, 241, 0.45);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Footer note */
+.form-note {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+@media (max-width: 600px) {
+    .form-wrapper {
+        padding: 32px 24px;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

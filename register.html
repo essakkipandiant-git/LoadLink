@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - LoadLink</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container {
+            max-width: 480px;
+            margin: 80px auto;
+            position: relative;
+            z-index: 10;
+            padding: 0 5%;
+        }
+        .auth-card {
+            background: var(--bg-surface-elevated);
+            padding: 44px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+        }
+        .auth-title {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .auth-title .auth-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--accent-gradient);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 26px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+        .auth-title h2 { font-size: 28px; margin-bottom: 8px; font-weight: 800; }
+        .auth-title p { color: var(--text-muted); font-size: 15px; }
+        
+        .role-tabs {
+            display: flex;
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            padding: 4px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+        }
+        .role-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            transition: all var(--transition-fast);
+        }
+        .role-tab.active {
+            background: var(--accent-gradient);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        .role-tab i { margin-right: 6px; }
+
+        .auth-form { display: flex; flex-direction: column; gap: 18px; }
+        .auth-form label { font-size: 14px; font-weight: 600; color: var(--text-main); }
+        .auth-form input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-main);
+            font-size: 15px;
+            outline: none;
+            transition: all var(--transition-fast);
+        }
+        .auth-form input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+            background: var(--bg-page);
+        }
+        
+        .auth-btn {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all var(--transition-base);
+            width: 100%;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+        }
+        .auth-btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+        }
+        .auth-footer { text-align: center; margin-top: 24px; font-size: 14px; color: var(--text-muted); }
+        .auth-footer a { color: var(--primary-color); text-decoration: none; font-weight: 600; }
+        .auth-footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header class="container1" id="main-header">
+        <div class="left">
+            <a href="index.html" class="logo"><i class="fa-solid fa-truck-fast"></i></a>
+            <span class="brand">Load<span class="gradient-text">Link</span></span>
+        </div>
+        <ul class="right" id="nav-links">
+            <li><a href="index.html">Back to Home</a></li>
+            <li><button id="theme-toggle" class="theme-toggle"><i class="fa-solid fa-moon"></i></button></li>
+        </ul>
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="animated-bg">
+        <div class="blob"></div><div class="blob"></div><div class="blob"></div>
+    </div>
+
+    <div class="auth-container fade-up">
+        <div class="auth-card">
+            <div class="auth-title">
+                <div class="auth-icon"><i class="fa-solid fa-user-plus"></i></div>
+                <h2>Create an Account</h2>
+                <p>Join LoadLink to start connecting</p>
+            </div>
+
+            <div class="role-tabs">
+                <div class="role-tab active" data-role="shopkeeper"><i class="fa-solid fa-shop"></i> Shopkeeper</div>
+                <div class="role-tab" data-role="driver"><i class="fa-solid fa-truck"></i> Driver</div>
+            </div>
+
+            <form id="register-form" class="auth-form">
+                <input type="hidden" id="role" value="shopkeeper">
+                
+                <div>
+                    <label>Full Name / Business Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div>
+                    <label>Mobile Number</label>
+                    <input type="tel" id="mobile" placeholder="10-digit mobile number" required>
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Create a password" required>
+                </div>
+                
+                <button type="submit" class="auth-btn" id="submit-btn">
+                    <i class="fa-solid fa-user-plus"></i> Register
+                </button>
+                <div id="error-msg" style="color: #ef4444; font-size: 14px; text-align: center; display: none;"></div>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Log in here</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.querySelectorAll('.role-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                document.getElementById('role').value = e.currentTarget.getAttribute('data-role');
+            });
+        });
+
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const errorMsg = document.getElementById('error-msg');
+            
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Registering...';
+            btn.disabled = true;
+            errorMsg.style.display = 'none';
+
+            const name = document.getElementById('name').value;
+            const mobile = document.getElementById('mobile').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, mobile, password, role })
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok) {
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    window.location.href = 'index.html';
+                } else {
+                    errorMsg.innerText = data.error;
+                    errorMsg.style.display = 'block';
+                    btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Register';
+                    btn.disabled = false;
+                }
+            } catch(e) {
+                errorMsg.innerText = "Network error occurred.";
+                errorMsg.style.display = 'block';
+                btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Register';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

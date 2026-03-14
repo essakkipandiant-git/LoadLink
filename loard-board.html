@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoadLink – Load Board</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="loard-board.css">
+  <style>
+    .board-container { margin-top: 50px; }
+    .data-card {
+        background: var(--bg-surface-elevated);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-xl);
+        padding: 24px;
+        margin-bottom: 16px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all var(--transition-base);
+        animation: fadeUp 0.6s ease-out forwards;
+        position: relative;
+        overflow: hidden;
+    }
+    .data-card::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 4px;
+        background: var(--accent-gradient);
+        opacity: 0;
+        transition: opacity var(--transition-base);
+    }
+    .data-card:hover {
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+    .data-card:hover::before {
+        opacity: 1;
+    }
+    .data-left h3 { color: var(--text-main); font-size: 18px; margin-bottom: 6px; font-weight: 700; }
+    .data-left p { color: var(--text-muted); font-size: 14px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .data-left .route { font-weight: 600; color: var(--primary-color); }
+    
+    .data-right { text-align: right; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+    .data-right .contact {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--primary-color);
+        color: white;
+        padding: 8px 16px;
+        border-radius: var(--radius-md);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all var(--transition-fast);
+    }
+    .data-right .contact:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+    .data-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 12px;
+        border-radius: var(--radius-full);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+    .badge-blue { background: rgba(99, 102, 241, 0.1); color: #6366f1; }
+    .badge-red { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+    [data-theme="dark"] .badge-blue { background: rgba(129, 140, 248, 0.15); color: #818cf8; }
+    [data-theme="dark"] .badge-red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+    .hidden { display: none !important; }
+    
+    @media (max-width: 768px) {
+        .data-card { flex-direction: column; align-items: flex-start; gap: 16px; }
+        .data-right { align-items: flex-start; text-align: left; }
+        .data-actions { justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="container1" id="main-header">
+    <div class="left">
+      <a href="index.html" class="logo"><i class="fa-solid fa-truck-fast"></i></a>
+      <span class="brand">Load<span class="gradient-text">Link</span></span>
+    </div>
+    <ul class="right" id="nav-links">
+      <li><a href="post-vehicle.html">Post Vehicle</a></li>
+      <li><a href="post-load.html">Post Load</a></li>
+      <li><a href="loard-board.html" style="color: var(--text-main)">Load Board</a></li>
+      <li><a href="login.html" id="nav-login">Login</a></li>
+      <li id="nav-user-menu" class="user-menu hidden">
+          <span class="user-name"><i class="fa-solid fa-circle-user"></i> <span id="user-display">User</span></span>
+          <button id="nav-logout" class="logout-btn">Logout</button>
+      </li>
+      <li><button id="theme-toggle" class="theme-toggle"><i class="fa-solid fa-moon"></i></button></li>
+    </ul>
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="animated-bg">
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+  </div>
+
+  <div class="board-container fade-up">
+    <div class="board-header">
+      <div class="section-badge"><i class="fa-solid fa-chart-line"></i> Live Marketplace</div>
+      <h1 class="text">Load Board</h1>
+      <p class="small-text">Live marketplace connecting drivers and shopkeepers in real-time.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon purple"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="stat-content">
+            <small>Total Active</small>
+            <h2 id="total-count">0</h2>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fa-solid fa-truck"></i></div>
+        <div class="stat-content">
+            <small>Available Vehicles</small>
+            <h2 class="blue-text" id="vehicle-count">0</h2>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon red"><i class="fa-solid fa-box-open"></i></div>
+        <div class="stat-content">
+            <small>Loads to Move</small>
+            <h2 class="red-text" id="load-count">0</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-panel">
+      <div class="tabs">
+        <div class="tab active" data-type="all"><i class="fa-solid fa-list"></i> All Postings</div>
+        <div class="tab" data-type="vehicles"><i class="fa-solid fa-truck"></i> Vehicles</div>
+        <div class="tab" data-type="loads"><i class="fa-solid fa-box"></i> Loads</div>
+      </div>
+
+      <div class="route-filter">
+          <select id="filter-origin">
+              <option value="">Any Origin/Pickup</option>
+              <option value="Navi Mumbai">Navi Mumbai</option>
+              <option value="Pune">Pune</option>
+              <option value="Andheri">Andheri</option>
+              <option value="Borivali">Borivali</option>
+              <option value="Thane">Thane</option>
+          </select>
+          <i class="fa-solid fa-arrow-right" style="color: var(--text-muted)"></i>
+          <select id="filter-dest">
+              <option value="">Any Destination/Drop</option>
+              <option value="Navi Mumbai">Navi Mumbai</option>
+              <option value="Pune">Pune</option>
+              <option value="Andheri">Andheri</option>
+              <option value="Borivali">Borivali</option>
+              <option value="Thane">Thane</option>
+          </select>
+      </div>
+
+      <div class="filters">
+        <button class="btn refresh" onclick="fetchData()"><i class="fa-solid fa-rotate"></i> Refresh</button>
+      </div>
+    </div>
+
+    <div id="data-container"></div>
+
+    <div class="empty-state hidden" id="empty-state">
+      <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
+      <h3>No Postings Found</h3>
+      <p>Be the first to post! Create a vehicle or load posting.</p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let allData = [];
+    let currentFilter = 'all';
+
+    async function fetchData() {
+        const btn = document.querySelector('.refresh');
+        const icon = btn.querySelector('i');
+        icon.classList.add('fa-spin');
+        
+        try {
+            const [loadRes, vehicleRes] = await Promise.all([
+                fetch('/api/loads'),
+                fetch('/api/vehicles')
+            ]);
+            
+            const loadJson = await loadRes.json();
+            const vehicleJson = await vehicleRes.json();
+            
+            let loads = loadJson.data || [];
+            let vehicles = vehicleJson.data || [];
+
+            loads = loads.map(item => ({...item, _type: 'load'}));
+            vehicles = vehicles.map(item => ({...item, _type: 'vehicle'}));
+
+            document.getElementById('load-count').innerText = loads.length;
+            document.getElementById('vehicle-count').innerText = vehicles.length;
+            document.getElementById('total-count').innerText = loads.length + vehicles.length;
+
+            allData = [...loads, ...vehicles].sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+            renderData();
+
+        } catch (error) {
+            console.error("Failed to fetch data", error);
+        } finally {
+            icon.classList.remove('fa-spin');
+        }
+    }
+
+    function renderData() {
+        const container = document.getElementById('data-container');
+        const emptyState = document.getElementById('empty-state');
+        container.innerHTML = '';
+        
+        const filterOrigin = document.getElementById('filter-origin').value;
+        const filterDest = document.getElementById('filter-dest').value;
+
+        const filtered = allData.filter(item => {
+            const typeMatch = currentFilter === 'all' || item._type === currentFilter.slice(0,-1);
+            if (!typeMatch) return false;
+
+            const originMatch = filterOrigin === '' || 
+                                (item._type === 'load' && item.pickup_area === filterOrigin) ||
+                                (item._type === 'vehicle' && item.current_area === filterOrigin);
+                                
+            const destMatch = filterDest === '' || 
+                              (item._type === 'load' && item.drop_area === filterDest) ||
+                              (item._type === 'vehicle' && item.destination_area === filterDest);
+
+            return originMatch && destMatch;
+        });
+
+        if (filtered.length === 0) {
+            emptyState.classList.remove('hidden');
+        } else {
+            emptyState.classList.add('hidden');
+            filtered.forEach(item => {
+                const isLoad = item._type === 'load';
+                const badgeClass = isLoad ? 'badge-red' : 'badge-blue';
+                const badgeIcon = isLoad ? 'fa-box' : 'fa-truck';
+                const badgeText = isLoad ? 'Load Request' : 'Available Vehicle';
+                const name = isLoad ? item.shop_name : item.driver_name;
+                const typeInfo = isLoad ? `${item.goods_type} (${item.weight})` : item.vehicle_type;
+                const time = isLoad ? item.preferred_time : item.available_time;
+                const area1 = isLoad ? item.pickup_area : item.current_area;
+                const area2 = isLoad ? item.drop_area : item.destination_area;
+
+                const phoneLink = `tel:${item.contact_number}`;
+                const waLink = `https://wa.me/91${item.contact_number}`;
+
+                container.innerHTML += `
+                    <div class="data-card">
+                        <div class="data-left">
+                            <span class="badge ${badgeClass}"><i class="fa-solid ${badgeIcon}"></i> ${badgeText}</span>
+                            <h3>${name}</h3>
+                            <p class="route"><i class="fa-solid fa-location-dot"></i> ${area1} &rarr; ${area2}</p>
+                            <p><i class="fa-solid fa-box"></i> ${typeInfo}</p>
+                            <p><i class="fa-solid fa-clock"></i> ${time}</p>
+                            ${item.notes ? `<p><i class="fa-solid fa-note-sticky"></i> ${item.notes}</p>` : ''}
+                        </div>
+                        <div class="data-right">
+                            <p style="color:var(--text-muted); font-size:12px;">${new Date(item.created_at).toLocaleDateString()}</p>
+                            <div class="data-actions">
+                                <a href="${phoneLink}" class="contact"><i class="fa-solid fa-phone"></i> Call</a>
+                                <a href="${waLink}" class="contact" style="background:#25D366;" target="_blank"><i class="fa-brands fa-whatsapp"></i> Chat</a>
+                                <button class="contact book-btn" style="background:var(--primary-color); border:none; cursor:pointer;" onclick="bookItem('${item._type}', ${item.id}, ${item.user_id})">
+                                    <i class="fa-solid fa-handshake"></i> Book
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    async function bookItem(post_type, post_id, owner_id) {
+        const currentUserStr = localStorage.getItem('currentUser');
+        if (!currentUserStr) {
+            alert("You must be logged in to book an item!");
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        const user = JSON.parse(currentUserStr);
+        if (user.id === owner_id) {
+            alert("You cannot book your own posting.");
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/book', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ post_type, post_id, booker_id: user.id, owner_id })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                alert("Booking request sent successfully!");
+            } else {
+                alert("Error: " + data.error);
+            }
+        } catch (err) {
+            alert("Network error.");
+        }
+    }
+
+    document.getElementById('filter-origin').addEventListener('change', renderData);
+    document.getElementById('filter-dest').addEventListener('change', renderData);
+
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            currentFilter = e.currentTarget.getAttribute('data-type');
+            renderData();
+        });
+    });
+
+    fetchData();
+    setInterval(fetchData, 10000);
+  </script>
+</body>
+</html>

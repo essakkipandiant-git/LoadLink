@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Vehicle - LoadLink</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="post-vehicle.css">
+</head>
+<body>
+
+    <header class="container1" id="main-header">
+        <div class="left">
+            <a href="index.html" class="logo"><i class="fa-solid fa-truck-fast"></i></a>
+            <span class="brand">Load<span class="gradient-text">Link</span></span>
+        </div>
+        <ul class="right" id="nav-links">
+            <li><a href="post-vehicle.html" style="color: var(--text-main)">Post Vehicle</a></li>
+            <li><a href="post-load.html">Post Load</a></li>
+            <li><a href="loard-board.html">Load Board</a></li>
+            <li><a href="login.html" id="nav-login">Login</a></li>
+            <li id="nav-user-menu" class="user-menu hidden">
+                <span class="user-name"><i class="fa-solid fa-circle-user"></i> <span id="user-display">User</span></span>
+                <button id="nav-logout" class="logout-btn">Logout</button>
+            </li>
+            <li><button id="theme-toggle" class="theme-toggle"><i class="fa-solid fa-moon"></i></button></li>
+        </ul>
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="animated-bg">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
+    <div class="page-container fade-up">
+        <div class="title-section">
+            <div class="title-icon">
+                <i class="fa-solid fa-truck-moving"></i>
+            </div>
+            <h1 class="text">Post Your Empty Vehicle</h1>
+            <p class="small-text">
+                Fill in your vehicle details below. Shopkeepers will contact you directly when they have matching loads.
+            </p>
+        </div>
+
+        <div class="form-wrapper">
+            <form id="post-vehicle-form" class="custom-form">
+
+                <div class="form-group">
+                    <label>Driver Name <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input type="text" id="driver_name" placeholder="Enter your full name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile Number <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-phone input-icon"></i>
+                        <input type="tel" id="contact_number" placeholder="10-digit mobile number" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Vehicle Type <span class="required">*</span></label>
+                    <div class="select-wrapper">
+                        <select id="vehicle_type" required>
+                            <option value="" disabled selected>Select vehicle type</option>
+                            <option>Tempo</option>
+                            <option>Mini Truck</option>
+                            <option>Truck</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Current Area <span class="required">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="current_area" required>
+                                <option value="" disabled selected>Select your current area</option>
+                                <option>Navi Mumbai</option>
+                                <option>Pune</option>
+                                <option>Andheri</option>
+                                <option>Borivali</option>
+                                <option>Thane</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Going Towards <span class="required">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="destination_area" required>
+                                <option value="" disabled selected>Select destination area</option>
+                                <option>Navi Mumbai</option>
+                                <option>Pune</option>
+                                <option>Andheri</option>
+                                <option>Borivali</option>
+                                <option>Thane</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Available Time <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-clock input-icon"></i>
+                        <input type="text" id="available_time" placeholder="e.g., 9 AM - 6 PM, Anytime" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Notes (Optional)</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-note-sticky input-icon" style="top: 24px;"></i>
+                        <textarea id="notes" placeholder="Any additional details (e.g., vehicle condition)"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <i class="fa-solid fa-paper-plane"></i> Post My Vehicle
+                </button>
+                <div id="status-message" style="text-align:center; margin-top: 10px; font-weight: bold;"></div>
+
+                <p class="form-note">
+                    <i class="fa-solid fa-shield-halved"></i> By posting, you agree to be contacted by shopkeepers for load matching.
+                </p>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('post-vehicle-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const status = document.getElementById('status-message');
+            
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Posting...';
+            btn.disabled = true;
+    
+            const session = JSON.parse(localStorage.getItem('currentUser'));
+            if(!session) { window.location.href = 'login.html'; return; }
+
+            const data = {
+                user_id: session.id,
+                driver_name: document.getElementById('driver_name').value,
+                contact_number: document.getElementById('contact_number').value,
+                vehicle_type: document.getElementById('vehicle_type').value,
+                current_area: document.getElementById('current_area').value,
+                destination_area: document.getElementById('destination_area').value,
+                available_time: document.getElementById('available_time').value,
+                notes: document.getElementById('notes').value
+            };
+    
+            try {
+                const response = await fetch('/api/vehicles', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+    
+                if (response.ok) {
+                    status.style.color = 'var(--primary-color)';
+                    status.innerText = "Vehicle posted successfully!";
+                    document.getElementById('post-vehicle-form').reset();
+                    setTimeout(() => window.location.href = 'loard-board.html', 1500);
+                } else {
+                    status.style.color = '#ef4444';
+                    status.innerText = "Error posting vehicle.";
+                }
+            } catch (error) {
+                status.style.color = '#ef4444';
+                status.innerText = "Network error.";
+            } finally {
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Post My Vehicle';
+                btn.disabled = false;
+            }
+        });
+      </script>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoadLink - India's #1 Transport Marketplace</title>
+    <meta name="description"
+        content="LoadLink connects drivers and shopkeepers in real-time. Zero commissions. Find loads, post vehicles, and grow your business today.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Glassmorphism Header -->
+    <header class="container1" id="main-header">
+        <div class="left">
+            <a class="logo" href="index.html"><i class="fa-solid fa-truck-fast"></i></a>
+            <span class="brand">Load<span class="gradient-text">Link</span></span>
+        </div>
+        <ul class="right" id="nav-links">
+            <li><a href="post-vehicle.html">Post Vehicle</a></li>
+            <li><a href="post-load.html">Post Load</a></li>
+            <li><a href="loard-board.html">Load Board</a></li>
+            <li><a href="login.html" id="nav-login">Login</a></li>
+            <!-- User Menu (Hidden by default) -->
+            <li id="nav-user-menu" class="user-menu hidden">
+                <span class="user-name"><i class="fa-solid fa-circle-user"></i> <span
+                        id="user-display">User</span></span>
+                <button id="nav-logout" class="logout-btn">Logout</button>
+            </li>
+            <li><button id="theme-toggle" class="theme-toggle"><i class="fa-solid fa-moon"></i></button></li>
+        </ul>
+        <!-- Mobile Hamburger -->
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- Floating Animated Background -->
+    <div class="animated-bg">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
+    <!-- Main Hero -->
+    <main class="main">
+        <div class="main-content fade-up">
+            <div class="hero-badge"><i class="fa-solid fa-rocket"></i> India's Fastest Growing Transport Network</div>
+            <h1 class="text">Move goods. <span class="gradient-text">Earn more.</span></h1>
+            <p class="small-text">
+                The most efficient marketplace connecting drivers and shopkeepers in real-time. Zero commissions.
+                Complete control. Trusted by thousands across India.
+            </p>
+            <div class="main-btn">
+                <a class="btn one" href="post-vehicle.html">
+                    <i class="fa-solid fa-truck"></i> Start Driver Portal <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a class="btn two" href="post-load.html">
+                    <i class="fa-solid fa-box"></i> Find a Vehicle
+                </a>
+            </div>
+            <div class="hero-trust">
+                <div class="trust-avatars">
+                    <div class="avatar" style="background: #667eea;"><i class="fa-solid fa-user"
+                            style="font-size:12px; color:white;"></i></div>
+                    <div class="avatar" style="background: #f093fb;"><i class="fa-solid fa-user"
+                            style="font-size:12px; color:white;"></i></div>
+                    <div class="avatar" style="background: #4facfe;"><i class="fa-solid fa-user"
+                            style="font-size:12px; color:white;"></i></div>
+                    <div class="avatar" style="background: #43e97b;"><i class="fa-solid fa-user"
+                            style="font-size:12px; color:white;"></i></div>
+                </div>
+                <span>Joined by <strong>1,000+</strong> users this month</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Interactive Scrolling Banner -->
+    <div class="ticker-banner fade-up">
+        <div class="ticker-content">
+            <div class="ticker-item"><i class="fa-solid fa-bolt"></i> Real-time Matching</div>
+            <div class="ticker-item"><i class="fa-solid fa-sack-dollar"></i> Zero Commission</div>
+            <div class="ticker-item"><i class="fa-solid fa-handshake"></i> Direct Negotiation</div>
+            <div class="ticker-item"><i class="fa-solid fa-shield-halved"></i> Verified Drivers</div>
+            <div class="ticker-item"><i class="fa-solid fa-clock"></i> 24/7 Available</div>
+            <div class="ticker-item"><i class="fa-solid fa-map-location-dot"></i> 25+ Cities</div>
+            <!-- Duplicate for infinite scroll -->
+            <div class="ticker-item"><i class="fa-solid fa-bolt"></i> Real-time Matching</div>
+            <div class="ticker-item"><i class="fa-solid fa-sack-dollar"></i> Zero Commission</div>
+            <div class="ticker-item"><i class="fa-solid fa-handshake"></i> Direct Negotiation</div>
+            <div class="ticker-item"><i class="fa-solid fa-shield-halved"></i> Verified Drivers</div>
+            <div class="ticker-item"><i class="fa-solid fa-clock"></i> 24/7 Available</div>
+            <div class="ticker-item"><i class="fa-solid fa-map-location-dot"></i> 25+ Cities</div>
+        </div>
+    </div>
+
+    <!-- Animated Stats Counter Section -->
+    <section class="stats-section" id="stats-section">
+        <div class="stats-inner fade-up">
+            <div class="stat-block">
+                <div class="stat-icon-wrap"><i class="fa-solid fa-users"></i></div>
+                <h2 class="counter" data-target="1000">0</h2>
+                <span class="stat-suffix">+</span>
+                <p>Active Users</p>
+            </div>
+            <div class="stat-block">
+                <div class="stat-icon-wrap"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                <h2 class="counter" data-target="5000">0</h2>
+                <span class="stat-suffix">+</span>
+                <p>Loads Delivered</p>
+            </div>
+            <div class="stat-block">
+                <div class="stat-icon-wrap"><i class="fa-solid fa-city"></i></div>
+                <h2 class="counter" data-target="25">0</h2>
+                <span class="stat-suffix">+</span>
+                <p>Cities Covered</p>
+            </div>
+            <div class="stat-block">
+                <div class="stat-icon-wrap"><i class="fa-solid fa-star"></i></div>
+                <h2 class="counter" data-target="98">0</h2>
+                <span class="stat-suffix">%</span>
+                <p>Satisfaction Rate</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="trusted-section fade-up">
+        <p class="trusted-label">Trusted by businesses across India</p>
+        <div class="trusted-marquee">
+            <div class="trusted-track">
+                <div class="trusted-logo"><i class="fa-solid fa-building"></i> MoveIt Logistics</div>
+                <div class="trusted-logo"><i class="fa-solid fa-warehouse"></i> QuickHaul</div>
+                <div class="trusted-logo"><i class="fa-solid fa-truck-front"></i> PackDash</div>
+                <div class="trusted-logo"><i class="fa-solid fa-boxes-stacked"></i> TransitPro</div>
+                <div class="trusted-logo"><i class="fa-solid fa-route"></i> RouteKing</div>
+                <div class="trusted-logo"><i class="fa-solid fa-dolly"></i> SwiftCargo</div>
+                <!-- Duplicate for infinite scroll -->
+                <div class="trusted-logo"><i class="fa-solid fa-building"></i> MoveIt Logistics</div>
+                <div class="trusted-logo"><i class="fa-solid fa-warehouse"></i> QuickHaul</div>
+                <div class="trusted-logo"><i class="fa-solid fa-truck-front"></i> PackDash</div>
+                <div class="trusted-logo"><i class="fa-solid fa-boxes-stacked"></i> TransitPro</div>
+                <div class="trusted-logo"><i class="fa-solid fa-route"></i> RouteKing</div>
+                <div class="trusted-logo"><i class="fa-solid fa-dolly"></i> SwiftCargo</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="main-two">
+        <div class="main-content1 fade-up">
+            <div class="section-badge"><i class="fa-solid fa-gear"></i> Simple Process</div>
+            <h2 class="text">How it works</h2>
+            <p class="small-text">Get started in minutes with our simple three-step process.</p>
+        </div>
+
+        <div class="process">
+            <div class="detail one fade-up">
+                <div class="step-number">01</div>
+                <div class="logo-two"><i class="fa-solid fa-pen-to-square"></i></div>
+                <h2>Post your details</h2>
+                <p>Add your vehicle availability or load requirements in under 2 minutes. Include area, destination, and
+                    contact.</p>
+            </div>
+
+            <div class="detail two fade-up" style="transition-delay: 0.1s">
+                <div class="step-number">02</div>
+                <div class="logo-two"><i class="fa-solid fa-satellite-dish"></i></div>
+                <h2>Live Broadcast</h2>
+                <p>Your posting appears instantly on the load board. Watch for potential matches in real-time as others
+                    post.</p>
+            </div>
+
+            <div class="detail three fade-up" style="transition-delay: 0.2s">
+                <div class="step-number">03</div>
+                <div class="logo-two"><i class="fa-solid fa-phone-volume"></i></div>
+                <h2>Direct Negotiation</h2>
+                <p>Call or message directly to negotiate. Complete control over terms with zero commission or middleman.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose LoadLink -->
+    <section class="why-section fade-up">
+        <div class="section-badge"><i class="fa-solid fa-trophy"></i> Why LoadLink</div>
+        <h2 class="text" style="text-align:center; margin-bottom: 60px;">Built for the <span
+                class="gradient-text">modern</span> transporter</h2>
+
+        <div class="features-grid">
+            <div class="feature-card fade-up">
+                <div class="feature-icon-wrap" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h3>Real-time Matching</h3>
+                <p>Instantly find loads or vehicles that match your route. Our smart algorithm connects you in seconds.
+                </p>
+            </div>
+
+            <div class="feature-card fade-up" style="transition-delay: 0.2s;">
+                <div class="feature-icon-wrap" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <h3>Verified Network</h3>
+                <p>Every driver and shopkeeper is verified. Build trust with ratings, reviews, and verified profiles.
+                </p>
+            </div>
+            <div class="feature-card fade-up" style="transition-delay: 0.3s;">
+                <div class="feature-icon-wrap" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Our dedicated support team is always available. Get help anytime via WhatsApp, call, or chat.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopify-style Interactive Accordion -->
+    <section class="features-interactive">
+        <div class="accordion-container fade-up">
+            <div class="section-badge"><i class="fa-solid fa-layer-group"></i> Platform Details</div>
+            <h2 class="text" style="font-size: 2.5rem; margin-bottom: 30px;">Built for scale.</h2>
+
+            <div class="accordion-item active">
+                <button class="accordion-header">
+                    <span><i class="fa-solid fa-truck" style="margin-right: 12px; color: var(--primary-color);"></i> For
+                        Drivers</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>Stop running empty vehicles. Find loads on your return trips instantly. Increase your daily
+                        earnings and save fuel costs without giving up any commission to third parties.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span><i class="fa-solid fa-shop" style="margin-right: 12px; color: var(--primary-color);"></i> For
+                        Shopkeepers</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>Find trucks specifically heading to your destination. Negotiate better rates directly with
+                        drivers and get your goods moved faster and safer.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span><i class="fa-solid fa-gift" style="margin-right: 12px; color: var(--primary-color);"></i>
+                        Always Free</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>LoadLink does not charge per transaction. Our goal is to connect the community effectively. No
+                        hidden costs, ever.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-image fade-up">
+            <div class="feature-visual">
+                <div class="visual-card card-1">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <span>Mumbai → Pune</span>
+                    <small class="visual-badge">Active</small>
+                </div>
+                <div class="visual-card card-2">
+                    <i class="fa-solid fa-box-open"></i>
+                    <span>Electronics • 2 Tons</span>
+                    <small class="visual-badge match">Matched!</small>
+                </div>
+                <div class="visual-card card-3">
+                    <i class="fa-solid fa-handshake"></i>
+                    <span>Direct Contact</span>
+                    <small class="visual-badge success">Connected</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section fade-up">
+        <div class="section-badge"><i class="fa-solid fa-quote-left"></i> Testimonials</div>
+        <h2 class="text" style="text-align:center; margin-bottom: 60px;">What our users <span
+                class="gradient-text">say</span></h2>
+
+        <div class="testimonials-carousel" id="testimonials-carousel">
+            <div class="testimonial-card active">
+                <div class="testimonial-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonial-text">"LoadLink completely changed my business. I used to run empty on return
+                    trips - now I earn on every journey. My monthly income increased by 40%!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);"><i
+                            class="fa-solid fa-user"></i></div>
+                    <div>
+                        <strong>Ravi Sharma</strong>
+                        <span>Truck Driver, Mumbai</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Finding reliable transport was always a headache. With LoadLink, I get
+                    verified drivers within minutes. The zero commission model is a game-changer!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);"><i
+                            class="fa-solid fa-user"></i></div>
+                    <div>
+                        <strong>Priya Patel</strong>
+                        <span>Shopkeeper, Pune</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Best platform for logistics. The real-time matching is incredible. I've
+                    saved thousands in broker fees since switching to LoadLink. Highly recommended!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #43e97b, #38f9d7);"><i
+                            class="fa-solid fa-user"></i></div>
+                    <div>
+                        <strong>Amit Desai</strong>
+                        <span>Fleet Owner, Thane</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-dots" id="carousel-dots">
+            <button class="dot active" data-index="0"></button>
+            <button class="dot" data-index="1"></button>
+            <button class="dot" data-index="2"></button>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section fade-up">
+        <div class="cta-content">
+            <h2>Ready to grow your <span class="gradient-text">business</span>?</h2>
+            <p>Join thousands of drivers and shopkeepers who are already saving money and growing their business with
+                LoadLink.</p>
+            <div class="cta-buttons">
+                <a class="btn one" href="register.html"
+                    style="font-size: 18px; padding: 18px 40px; border-radius: var(--radius-full);">
+                    <i class="fa-solid fa-user-plus"></i> Create Free Account
+                </a>
+                <a class="btn two" href="loard-board.html"
+                    style="font-size: 18px; padding: 18px 40px; border-radius: var(--radius-full);">
+                    <i class="fa-solid fa-eye"></i> View Live Board
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Footer -->
+    <footer class="pro-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo"><i class="fa-solid fa-truck-fast"></i></div>
+                    <span class="brand">Load<span class="gradient-text">Link</span></span>
+                </div>
+                <p>India's most efficient marketplace connecting drivers and shopkeepers. Zero commissions. Complete
+                    control.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Platform</h4>
+                <a href="loard-board.html">Load Board</a>
+                <a href="post-vehicle.html">Post Vehicle</a>
+                <a href="post-load.html">Post Load</a>
+                <a href="profile.html">My Profile</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">FAQ</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LoadLink. All rights reserved. Made with <i class="fa-solid fa-heart"
+                    style="color: #ef4444;"></i> in India</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

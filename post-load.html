@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post a Load - LoadLink</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="post-load.css">
+</head>
+<body>
+
+  <header class="container1" id="main-header">
+    <div class="left">
+      <a href="index.html" class="logo"><i class="fa-solid fa-truck-fast"></i></a>
+      <span class="brand">Load<span class="gradient-text">Link</span></span>
+    </div>
+    <ul class="right" id="nav-links">
+      <li><a href="post-vehicle.html">Post Vehicle</a></li>
+      <li><a href="post-load.html" style="color: var(--text-main)">Post Load</a></li>
+      <li><a href="loard-board.html">Load Board</a></li>
+      <li><a href="login.html" id="nav-login">Login</a></li>
+      <li id="nav-user-menu" class="user-menu hidden">
+          <span class="user-name"><i class="fa-solid fa-circle-user"></i> <span id="user-display">User</span></span>
+          <button id="nav-logout" class="logout-btn">Logout</button>
+      </li>
+      <li><button id="theme-toggle" class="theme-toggle"><i class="fa-solid fa-moon"></i></button></li>
+    </ul>
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="animated-bg">
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+  </div>
+
+  <div class="page-container fade-up">
+    <div class="title-section">
+      <div class="title-icon">
+        <i class="fa-solid fa-dolly"></i>
+      </div>
+      <h1 class="text">Post a Load</h1>
+      <p class="small-text">Fill in your load details below. Drivers will contact you directly when they have available vehicles.</p>
+    </div>
+
+    <div class="form-wrapper">
+      <form id="post-load-form" class="custom-form">
+
+        <div class="form-group">
+            <label>Shop / Business Name <span class="required">*</span></label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-shop input-icon"></i>
+                <input type="text" id="shop_name" placeholder="Enter your shop or business name" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Contact Number <span class="required">*</span></label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-phone input-icon"></i>
+                <input type="tel" id="contact_number" placeholder="10-digit mobile number" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Pickup Area <span class="required">*</span></label>
+                <div class="select-wrapper">
+                    <select id="pickup_area" required>
+                        <option value="" disabled selected>Select Pickup Area</option>
+                        <option>Navi Mumbai</option>
+                        <option>Pune</option>
+                        <option>Andheri</option>
+                        <option>Borivali</option>
+                        <option>Thane</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Drop Area / Destination <span class="required">*</span></label>
+                <div class="select-wrapper">
+                    <select id="drop_area" required>
+                        <option value="" disabled selected>Select Drop Area</option>
+                        <option>Navi Mumbai</option>
+                        <option>Pune</option>
+                        <option>Andheri</option>
+                        <option>Borivali</option>
+                        <option>Thane</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Type of Goods <span class="required">*</span></label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-boxes-packing input-icon"></i>
+                <input type="text" id="goods_type" placeholder="e.g., Electronics, Textiles, Hardware, Food items" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Approximate Weight <span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-weight-scale input-icon"></i>
+                    <input type="text" id="weight" placeholder="e.g., 2 tons, 500 kg" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Preferred Time <span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-clock input-icon"></i>
+                    <input type="text" id="preferred_time" placeholder="e.g., Immediate, Tomorrow" required>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">
+            <i class="fa-solid fa-paper-plane"></i> Post Load Now
+        </button>
+        <div id="status-message" style="text-align:center; margin-top: 10px; font-weight: bold;"></div>
+
+        <p class="form-note">
+          <i class="fa-solid fa-shield-halved"></i> By posting, you agree to be contacted by drivers for load matching.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('post-load-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('submit-btn');
+        const status = document.getElementById('status-message');
+        
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Posting...';
+        btn.disabled = true;
+
+        const session = JSON.parse(localStorage.getItem('currentUser'));
+        if(!session) { window.location.href = 'login.html'; return; }
+
+        const data = {
+            user_id: session.id,
+            shop_name: document.getElementById('shop_name').value,
+            contact_number: document.getElementById('contact_number').value,
+            pickup_area: document.getElementById('pickup_area').value,
+            drop_area: document.getElementById('drop_area').value,
+            goods_type: document.getElementById('goods_type').value,
+            weight: document.getElementById('weight').value,
+            preferred_time: document.getElementById('preferred_time').value
+        };
+
+        try {
+            const response = await fetch('/api/loads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                status.style.color = 'var(--primary-color)';
+                status.innerText = "Load posted successfully!";
+                document.getElementById('post-load-form').reset();
+                setTimeout(() => window.location.href = 'loard-board.html', 1500);
+            } else {
+                status.style.color = '#ef4444';
+                status.innerText = "Error posting load.";
+            }
+        } catch (error) {
+            status.style.color = '#ef4444';
+            status.innerText = "Network error.";
+        } finally {
+            btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Post Load Now';
+            btn.disabled = false;
+        }
+    });
+  </script>
+</body>
+</html>
