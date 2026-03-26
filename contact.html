@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - LoadLink</title>
+    <meta name="description" content="Get in touch with the LoadLink team. We'd love to hear from you.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <header class="container1" id="main-header">
+        <div class="left">
+            <a href="index.html" class="logo"><i class="fa-solid fa-truck-fast"></i></a>
+            <span class="brand">Load<span class="gradient-text">Link</span></span>
+        </div>
+        <ul class="right" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="loard-board.html">Load Board</a></li>
+            <li><button id="theme-toggle" class="theme-toggle"><i class="fa-solid fa-moon"></i></button></li>
+        </ul>
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="animated-bg">
+        <div class="blob"></div><div class="blob"></div><div class="blob"></div>
+    </div>
+
+    <div class="page-container fade-up">
+        <div class="page-card">
+            <div class="page-header">
+                <div class="page-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <h1>Contact Us</h1>
+                <p class="page-subtitle">We'd love to hear from you</p>
+            </div>
+
+            <div class="page-content">
+                <section class="content-section">
+                    <h2><i class="fa-solid fa-phone-volume"></i> Get in Touch</h2>
+                    <p>Have a question, suggestion, or need help? Reach out to us through any of the channels below. Our team typically responds within 24 hours.</p>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <i class="fa-solid fa-envelope"></i>
+                            <h3>Email</h3>
+                            <p><a href="mailto:support@loadlink.in" style="color: var(--primary-color);">support@loadlink.in</a></p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <h3>WhatsApp</h3>
+                            <p><a href="https://wa.me/919876543210" style="color: var(--primary-color);">+91 98765 43210</a></p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fa-solid fa-phone"></i>
+                            <h3>Phone</h3>
+                            <p><a href="tel:+911800123456" style="color: var(--primary-color);">1800-123-456</a> (Toll Free)</p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fa-solid fa-clock"></i>
+                            <h3>Hours</h3>
+                            <p>Mon–Sat: 9 AM – 8 PM<br>Sun: 10 AM – 5 PM</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2><i class="fa-solid fa-paper-plane"></i> Send Us a Message</h2>
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-name">Your Name</label>
+                                <input type="text" id="contact-name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email Address</label>
+                                <input type="email" id="contact-email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" id="contact-subject" placeholder="What is this about?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" rows="5" placeholder="Write your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn one" style="width: 100%; justify-content: center; padding: 16px;">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
+                        </button>
+                        <div id="contact-success" class="form-success" style="display:none;">
+                            <i class="fa-solid fa-circle-check"></i> Your message has been sent successfully! We'll get back to you soon.
+                        </div>
+                    </form>
+                </section>
+
+                <section class="content-section">
+                    <h2><i class="fa-solid fa-location-dot"></i> Our Office</h2>
+                    <div class="office-info">
+                        <p><strong>LoadLink Technologies Pvt. Ltd.</strong></p>
+                        <p>4th Floor, Trade Tower, BKC,<br>Bandra East, Mumbai – 400051<br>Maharashtra, India</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const successMsg = document.getElementById('contact-success');
+            successMsg.style.display = 'flex';
+            e.target.reset();
+            setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+        });
+    </script>
+</body>
+</html>
