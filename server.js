@@ -114,6 +114,46 @@ app.post('/api/vehicles', (req, res) => {
     });
 });
 
+// Delete a load (owner only)
+app.delete('/api/loads/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const rawUid = req.body && req.body.user_id != null ? req.body.user_id : req.query.user_id;
+    const user_id = parseInt(rawUid, 10);
+
+    if (isNaN(user_id)) return res.status(400).json({ error: 'valid user_id required' });
+
+    db.get('SELECT user_id FROM loads WHERE id = ?', [id], (err, row) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (!row) return res.status(404).json({ error: 'Load not found' });
+        if (parseInt(row.user_id) !== user_id) return res.status(403).json({ error: 'Not authorized' });
+
+        db.run('DELETE FROM loads WHERE id = ?', [id], function(err) {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ message: 'success' });
+        });
+    });
+});
+
+// Delete a vehicle (owner only)
+app.delete('/api/vehicles/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const rawUid = req.body && req.body.user_id != null ? req.body.user_id : req.query.user_id;
+    const user_id = parseInt(rawUid, 10);
+
+    if (isNaN(user_id)) return res.status(400).json({ error: 'valid user_id required' });
+
+    db.get('SELECT user_id FROM vehicles WHERE id = ?', [id], (err, row) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (!row) return res.status(404).json({ error: 'Vehicle not found' });
+        if (parseInt(row.user_id) !== user_id) return res.status(403).json({ error: 'Not authorized' });
+
+        db.run('DELETE FROM vehicles WHERE id = ?', [id], function(err) {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ message: 'success' });
+        });
+    });
+});
+
 // --- USER DASHBOARD ROUTES ---
 app.get('/api/user/:id/posts', (req, res) => {
     const userId = req.params.id;

@@ -90,7 +90,27 @@
     [data-theme="dark"] .badge-blue { background: rgba(129, 140, 248, 0.15); color: #818cf8; }
     [data-theme="dark"] .badge-red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
     .hidden { display: none !important; }
-    
+    .delete-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(239, 68, 68, 0.12);
+        color: #ef4444;
+        border: 1.5px solid rgba(239, 68, 68, 0.3);
+        padding: 8px 16px;
+        border-radius: var(--radius-md);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+    .delete-btn:hover {
+        background: #ef4444;
+        color: white;
+        border-color: #ef4444;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+    }
     @media (max-width: 768px) {
         .data-card { flex-direction: column; align-items: flex-start; gap: 16px; }
         .data-right { align-items: flex-start; text-align: left; }
@@ -213,8 +233,8 @@
         
         try {
             const [loadRes, vehicleRes] = await Promise.all([
-                fetch('/api/loads'),
-                fetch('/api/vehicles')
+                fetch('/api/loads', { cache: 'no-store' }),
+                fetch('/api/vehicles', { cache: 'no-store' })
             ]);
             
             const loadJson = await loadRes.json();
@@ -281,6 +301,10 @@
                 const phoneLink = `tel:${item.contact_number}`;
                 const waLink = `https://wa.me/91${item.contact_number}`;
 
+                const currentUserStr = localStorage.getItem('currentUser');
+                const currentUser = currentUserStr ? JSON.parse(currentUserStr) : null;
+                const isOwner = currentUser && Number(currentUser.id) === Number(item.user_id);
+
                 container.innerHTML += `
                     <div class="data-card">
                         <div class="data-left">
@@ -299,11 +323,47 @@
                                 <button class="contact book-btn" style="background:var(--primary-color); border:none; cursor:pointer;" onclick="bookItem('${item._type}', ${item.id}, ${item.user_id})">
                                     <i class="fa-solid fa-handshake"></i> Book
                                 </button>
+                                ${isOwner ? `<button class="delete-btn" onclick="deletePost('${item._type}', ${item.id})"><i class="fa-solid fa-trash"></i> Delete</button>` : ''}
                             </div>
                         </div>
                     </div>
                 `;
             });
+        }
+    }
+
+    async function deletePost(type, id) {
+        const currentUserStr = localStorage.getItem('currentUser');
+        if (!currentUserStr) {
+            alert('You must be logged in to delete a post.');
+            return;
+        }
+        const user = JSON.parse(currentUserStr);
+        if (!confirm('Are you sure you want to delete this posting? This cannot be undone.')) return;
+
+        try {
+            const uid = encodeURIComponent(user.id);
+            const res = await fetch(`/api/${type}s/${id}?user_id=${uid}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: parseInt(user.id, 10) })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                const numId = Number(id);
+                allData = allData.filter(item => !(item._type === type && Number(item.id) === numId));
+                const loadCount = allData.filter(i => i._type === 'load').length;
+                const vehicleCount = allData.filter(i => i._type === 'vehicle').length;
+                document.getElementById('load-count').innerText = loadCount;
+                document.getElementById('vehicle-count').innerText = vehicleCount;
+                document.getElementById('total-count').innerText = allData.length;
+                renderData();
+                fetchData();
+            } else {
+                alert('Delete failed: ' + data.error);
+            }
+        } catch (err) {
+            alert('Network error: ' + err.message);
         }
     }
 
